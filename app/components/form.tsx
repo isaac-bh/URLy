@@ -8,14 +8,21 @@ export const Form = () => {
   const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
-    const response = await fetch('/api/url', {
-      method: 'POST',
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({url: url})
-    })
+    const urlRegex: RegExp = /^https?:\/\/(?:www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b(?:[-a-zA-Z0-9()@:%_\+.~#?&\/=]*)$/
 
-    if (response.ok) alert("Done")
-    else alert("Error")
+    if (urlRegex.test(url)) {      
+      const response = await fetch('/api/url', {
+        method: 'POST',
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({url: url})
+      })
+  
+      if (response.ok) alert("Done")
+      else alert("Error")
+    } else {
+      alert("The URL submitted is not valid.")
+    }
+
   }
 
   return (
