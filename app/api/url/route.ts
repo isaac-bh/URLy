@@ -6,13 +6,14 @@ export async function POST(req: Request) {
   const body: { url: string } = await req.json()
 
   if (urlRegex.test(body.url)) {
-    const uid: string = generateUID()
+    let uid: string = ""
+    uid = await generateUID()
 
     const query = 'INSERT INTO urls (id, url, created_at) VALUES ($1, $2, $3)'
     const values = [uid, body?.url, new Date().toISOString()]
     const response = await conn.query(query, values)
 
-    return Response.json({ status: "URL Created" });
+    return Response.json({ uid: uid });
   } else {
     return Response.json({ error: "URL submitted is invalid" }, { status: 422 })
   }
