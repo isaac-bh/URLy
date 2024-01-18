@@ -1,3 +1,4 @@
+import { Form } from './components/form'
 import { geologica } from './fonts'
 
 export default function Home() {
@@ -22,10 +23,7 @@ export default function Home() {
             </h1>
             <p className='text-5xl'>Don't send 100+ characters URLs, send just a <span className='font-black'>short</span> one.</p>
           </div>
-          <form className='w-full my-4'>
-            <input autoComplete='off' type="text" name="url" placeholder='URL...' className='text-xl px-4 py-2 bg-white text-gray-800 border border-lime-600 active:border-red-400 rounded-l-2xl w-5/6' />
-            <button type='submit' className='text-xl text-white px-4 py-2 rounded-r-2xl border border-lime-600 bg-lime-600 hover:bg-lime-700 w-1/6'>Shorten</button>
-          </form>
+          <Form />
         </header>
       </main>
     </div>

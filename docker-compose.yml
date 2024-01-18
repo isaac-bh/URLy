@@ -1,0 +1,11 @@
+services:
+  postgres:
+    environment:
+      POSTGRES_DB: urly
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: pass123
+    build:
+      context: .
+      dockerfile: ./db.Dockerfile
+    ports:
+      - "5432:5432"
