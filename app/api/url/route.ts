@@ -13,7 +13,7 @@ export async function POST(req: Request) {
     const values = [uid, body?.url, new Date().toISOString()]
     const response = await conn.query(query, values)
 
-    return Response.json({ uid: uid });
+    return Response.json({ url: process.env.URL_DEPLOY + uid });
   } else {
     return Response.json({ error: "URL submitted is invalid" }, { status: 422 })
   }
