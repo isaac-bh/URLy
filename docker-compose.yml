@@ -1,11 +1,9 @@
 services:
   postgres:
+    image: postgres:16-alpine
     environment:
-      POSTGRES_DB: urly
-      POSTGRES_USER: admin
-      POSTGRES_PASSWORD: pass123
-    build:
-      context: .
-      dockerfile: ./db.Dockerfile
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
     ports:
       - "5432:5432"

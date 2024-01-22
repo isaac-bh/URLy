@@ -1,5 +1,0 @@
-CREATE TABLE urls (
-  id CHAR(5) UNIQUE NOT NULL,
-  url TEXT NOT NULL,
-  created_at TIMESTAMP NOT NULL
-);
