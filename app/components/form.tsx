@@ -26,6 +26,8 @@ export const Form = () => {
 
       if (response.ok) {
         const { url }: { url: string } = await response.json()
+        
+        navigator.clipboard.writeText(url);
 
         setTitle("URL creada")
         setContent(url)
