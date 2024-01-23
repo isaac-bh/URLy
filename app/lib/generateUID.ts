@@ -1,4 +1,4 @@
-import conn from "./db"
+import prisma from "./prisma"
 
 export const generateUID = async (len: number = 5) => {
   const characters: string = "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvXxYyZz0123456789"
@@ -8,11 +8,15 @@ export const generateUID = async (len: number = 5) => {
     for (let index: number = 0; index < len; index++) {
       uid += characters.charAt(Math.floor(Math.random() * characters.length))
     }
-  
-    const query = 'SELECT count(id) FROM urls WHERE id = $1'
-    const res = await conn.query(query, [uid])
+    
+    const res = await prisma.urls.count({
+      where: {
+        id: uid
+      }
+    })
 
-    if (res.rows[0]?.count === '0') break
+    console.log(res)
+    if (res === 0) break
     else uid = ''
   }
 

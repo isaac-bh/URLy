@@ -1,10 +1,16 @@
-import conn from "@/app/lib/db";
+import prisma from "@/app/lib/prisma";
 
-export async function GET(req: Request, route: {params: {id: string}}) {
-  const query = 'SELECT url FROM urls WHERE id = $1'
-  const values = [route.params.id]
-  const response = await conn.query(query, values)
+export async function GET(req: Request, route: { params: { id: string } }) {
+  try {
+    const response = await prisma.urls.findUniqueOrThrow({
+      where: {
+        id: route.params.id
+      }
+    })
 
-  return Response.json({url: response.rows[0]?.url})
+    return Response.json({ url: response.url })
+  } catch {
+    return Response.json({ status: 'URL Not found' }, { status: 404 })
+  }
   // return Response.json({ error: "URL submitted is invalid" }, { status: 422 })
 }
